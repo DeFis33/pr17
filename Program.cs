@@ -24,27 +24,42 @@ class Program
         }
         public void EnterData()
         {
-            Console.Write("Введите название здания: ");
-            Name = Console.ReadLine();
-
-            if (String.IsNullOrEmpty(Name))
+            try
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("\nВы ввели пустую строку.");
-                Console.ForegroundColor = ConsoleColor.White;
-                return;
-            }
-            Console.Write("Введите количество этажей: ");
-            string count = Console.ReadLine();
+                Console.Write("Введите название здания: ");
+                Name = Console.ReadLine();
 
-            if (Int32.TryParse(count, out int floors) && floors <= 0)
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("\nВы ввели пустую строку.");
-                Console.ForegroundColor = ConsoleColor.White;
-                return;
+                if (String.IsNullOrEmpty(Name))
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("\nВы ввели пустую строку.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    return;
+                }
+                Console.Write("Введите количество этажей: ");
+                string count = Console.ReadLine();
+
+                if (Int32.TryParse(count, out int floors) && String.IsNullOrEmpty(count) && floors <= 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("\nВы ввели пустую строку.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    return;
+                }
+                Floors = floors;
             }
-            Floors = floors;
+            catch (FormatException fe)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"\nОшибка ввода \n" + fe.Message);
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"\nОшибка ввода \n" + e.Message);
+                Console.ForegroundColor = ConsoleColor.White;
+            }
         }
         public void Display()
         {

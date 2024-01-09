@@ -14,51 +14,37 @@ class Program
         int floors;
         string Name
         {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
+            get { return name; }
+            set { name = value; }
         }
         int Floors
         {
-            get
-            {
-                return floors;
-            }
-            set
-            {
-                if (value >= 1)
-                    floors = value;
-                else Console.WriteLine("Количество этажей должно быть больше 0.");
-            }
+            get { return floors; }
+            set { floors = value; }
         }
         public void EnterData()
         {
             Console.Write("Введите название здания: ");
             Name = Console.ReadLine();
 
+            if (String.IsNullOrEmpty(Name))
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\nВы ввели пустую строку.");
+                Console.ForegroundColor = ConsoleColor.White;
+                return;
+            }
             Console.Write("Введите количество этажей: ");
-            try
+            string count = Console.ReadLine();
+
+            if (Int32.TryParse(count, out int floors) && floors <= 0)
             {
-                int a = Convert.ToInt32(Console.ReadLine());
-                Floors = a;
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\nВы ввели пустую строку.");
+                Console.ForegroundColor = ConsoleColor.White;
+                return;
             }
-            catch (FormatException fe)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"\nОшибка ввода \n" + fe.Message);
-                Console.ForegroundColor = ConsoleColor.Gray;
-            }
-            catch (Exception e)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"\nОшибка ввода \n" + e.Message);
-                Console.ForegroundColor = ConsoleColor.Gray;
-            }
+            Floors = floors;
         }
         public void Display()
         {
@@ -76,12 +62,12 @@ class Program
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Практическая работа №17.\nЗдравствуйте!");
 
-        Building House = new Building();
-        House.EnterData();
+        Building house = new Building();
+        house.EnterData();
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("\nИнформация о здании: ");
-        House.Display();
-        House.Calculation();
+        house.Display();
+        house.Calculation();
         Console.ForegroundColor = ConsoleColor.White;
         Console.ReadKey();
     }

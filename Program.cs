@@ -22,7 +22,7 @@ class Program
             get { return floors; }
             set { floors = value; }
         }
-        public void EnterData()
+        public bool EnterData()
         {
             try
             {
@@ -34,31 +34,35 @@ class Program
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("\nВы ввели пустую строку.");
                     Console.ForegroundColor = ConsoleColor.White;
-                    return;
+                    return false;
                 }
+
                 Console.Write("Введите количество этажей: ");
                 string count = Console.ReadLine();
 
-                if (Int32.TryParse(count, out int floors) && String.IsNullOrEmpty(count) && floors <= 0)
+                if (!Int32.TryParse(count, out int floors) || floors <= 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("\nВы ввели пустую строку.");
+                    Console.WriteLine("\nОшибка ввода: введите положительное число этажей.");
                     Console.ForegroundColor = ConsoleColor.White;
-                    return;
+                    return false;
                 }
                 Floors = floors;
+                return true;
             }
             catch (FormatException fe)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"\nОшибка ввода \n" + fe.Message);
                 Console.ForegroundColor = ConsoleColor.White;
+                return false;
             }
             catch (Exception e)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"\nОшибка ввода \n" + e.Message);
                 Console.ForegroundColor = ConsoleColor.White;
+                return false;
             }
         }
         public void Display()
@@ -68,8 +72,8 @@ class Program
         }
         public void Calculation()
         {
-            int window = Floors * 10;
-            Console.WriteLine($"Окон в вашем здании: {window}");
+            int Window = Floors * 10;
+            Console.WriteLine($"Окон в вашем здании: {Window}");
         }
     }
     static void Main()
@@ -78,12 +82,14 @@ class Program
         Console.WriteLine("Практическая работа №17.\nЗдравствуйте!");
 
         Building house = new Building();
-        house.EnterData();
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("\nИнформация о здании: ");
-        house.Display();
-        house.Calculation();
-        Console.ForegroundColor = ConsoleColor.White;
+        if (house.EnterData())
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nИнформация о здании: ");
+            house.Display();
+            house.Calculation();
+            Console.ForegroundColor = ConsoleColor.White;
+        }
         Console.ReadKey();
     }
 }

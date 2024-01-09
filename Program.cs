@@ -73,6 +73,7 @@ class Program
     }
     static void Main()
     {
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Практическая работа №17.\nЗдравствуйте!");
 
         Building House = new Building();
@@ -82,5 +83,6 @@ class Program
         House.DisplayData();
         House.Calculation();
         Console.ForegroundColor = ConsoleColor.White;
+        Console.ReadKey();
     }
 }

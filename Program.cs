@@ -60,7 +60,7 @@ class Program
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
         }
-        public void DisplayData()
+        public void Display()
         {
             Console.WriteLine($"Название здания: {Name}");
             Console.WriteLine($"Количество этажей: {Floors}");
@@ -80,7 +80,7 @@ class Program
         House.EnterData();
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("\nИнформация о здании: ");
-        House.DisplayData();
+        House.Display();
         House.Calculation();
         Console.ForegroundColor = ConsoleColor.White;
         Console.ReadKey();

@@ -5,91 +5,43 @@
 //***************************************************************************************************
 
 using System;
+using System.Xml.Linq;
 
 class Program
 {
     class Building
     {
-        string name;
-        int floors;
-        string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-        int Floors
-        {
-            get { return floors; }
-            set { floors = value; }
-        }
-        public bool EnterData()
-        {
-            try
-            {
-                Console.Write("Введите название здания: ");
-                Name = Console.ReadLine();
-
-                if (String.IsNullOrEmpty(Name))
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("\nВы ввели пустую строку.");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    return false;
-                }
-
-                Console.Write("Введите количество этажей: ");
-                string count = Console.ReadLine();
-
-                if (!Int32.TryParse(count, out int floors) || floors <= 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("\nОшибка ввода: введите положительное число этажей.");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    return false;
-                }
-                Floors = floors;
-                return true;
-            }
-            catch (FormatException fe)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"\nОшибка ввода \n" + fe.Message);
-                Console.ForegroundColor = ConsoleColor.White;
-                return false;
-            }
-            catch (Exception e)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"\nОшибка ввода \n" + e.Message);
-                Console.ForegroundColor = ConsoleColor.White;
-                return false;
-            }
-        }
-        public void Display()
-        {
-            Console.WriteLine($"Название здания: {Name}");
-            Console.WriteLine($"Количество этажей: {Floors}");
-        }
-        public void Calculation()
-        {
-            int Window = Floors * 10;
-            Console.WriteLine($"Окон в вашем здании: {Window}");
-        }
-    }
-    static void Main()
-    {
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Практическая работа №17.\nЗдравствуйте!");
-
-        Building house = new Building();
-        if (house.EnterData())
+        public string Name { get; set; }
+        public int Floors { get; set; }
+        public int Window { get; set; }
+        void GetInfo()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nИнформация о здании: ");
-            house.Display();
-            house.Calculation();
+            Console.WriteLine($"Название здания: {Name}");
+            Console.WriteLine($"Количество этажей: {Floors}");
+            Console.WriteLine($"Окон в вашем здании: {Window}");
             Console.ForegroundColor = ConsoleColor.White;
         }
+        public Building(string name_user, int floors_user, int window_user)
+        {
+            Name = name_user;
+            Floors = floors_user;
+            Window = window_user;
+            GetInfo();
+        }
+    }
+    public static void Main(string[] args)
+    {
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Практическая работа №17.\nЗдравствуйте!");
+        Console.Write("Введите название здания: ");
+        string Name = Console.ReadLine();
+        Console.Write("Введите количество этажей: ");
+        int Floors = Int32.Parse(Console.ReadLine());
+
+        Building obj1 = new Building(Name, Floors, Window);
+
         Console.ReadKey();
     }
 }

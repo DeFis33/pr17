@@ -45,4 +45,3 @@ class Program
         Console.ReadKey();
     }
 }
-D:\Users\1213-5\Documents\2-ИСП\Дисциплина\Основы программирования\Фамилия\Пирогов Д\pr16\pr16.txt

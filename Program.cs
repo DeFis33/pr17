@@ -14,6 +14,13 @@ class Program
         public string Name { get; set; }
         public int Floors { get; set; }
         public int Window { get; set; }
+        void Input()
+        {
+            Console.Write("Введите название здания: ");
+            Name = Console.ReadLine();
+            Console.Write("Введите количество этажей: ");
+            Floors = Int32.Parse(Console.ReadLine());
+        }
         void GetInfo()
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -23,11 +30,14 @@ class Program
             Console.WriteLine($"Окон в вашем здании: {Window}");
             Console.ForegroundColor = ConsoleColor.White;
         }
-        public Building(string name_user, int floors_user, int window_user)
+        int Calculate()
         {
-            Name = name_user;
-            Floors = floors_user;
-            Window = window_user;
+            return Floors * 10;
+        }
+        public Building()
+        {
+            Input();
+            Window = Calculate();
             GetInfo();
         }
     }
@@ -35,12 +45,8 @@ class Program
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Практическая работа №17.\nЗдравствуйте!");
-        Console.Write("Введите название здания: ");
-        string Name = Console.ReadLine();
-        Console.Write("Введите количество этажей: ");
-        int Floors = Int32.Parse(Console.ReadLine());
 
-        Building obj1 = new Building(Name, Floors, Window);
+        Building obj1 = new Building();
 
         Console.ReadKey();
     }

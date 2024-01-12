@@ -20,22 +20,20 @@ class Program
                 Environment.Exit(1);
             }
             Console.Write("Введите количество этажей: ");
-            if ((Int32.TryParse(Console.ReadLine(), out int floors) && floors > 0)) Floors = floors;
+            if (Int32.TryParse(Console.ReadLine(), out int floors) && floors > 0) Floors = floors;
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ошибка ввода. Количество этажей должно быть целым и больше нуля.");
                 Console.ForegroundColor = ConsoleColor.White;
-                Environment.Exit(1);
             }
             Console.Write("Введите высоту одного этажа (в метрах): ");
-            if ((Int32.TryParse(Console.ReadLine(), out int height) && height > 0)) Height = height;
+            if (Int32.TryParse(Console.ReadLine(), out int height) && height > 0) Height = height;
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ошибка ввода. Высота должна быть числом больше нуля.");
                 Console.ForegroundColor = ConsoleColor.White;
-                Environment.Exit(1);
             }
         }
         void GetInfo()

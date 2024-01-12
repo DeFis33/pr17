@@ -10,29 +10,44 @@ class Program
         public int Height { get; set; }
         void Input()
         {
-            Console.Write("Введите название здания: ");
-            Name = Console.ReadLine();
-            if (String.IsNullOrEmpty(Name))
+            try
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Ошибка ввода. Название здания не может быть пустым.");
-                Console.ForegroundColor = ConsoleColor.White;
-                Environment.Exit(1);
+                Console.Write("Введите название здания: ");
+                Name = Console.ReadLine();
+                if (String.IsNullOrEmpty(Name))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ошибка ввода. Название здания не может быть пустым.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Environment.Exit(1);
+                }
+                Console.Write("Введите количество этажей: ");
+                if (Int32.TryParse(Console.ReadLine(), out int floors) && floors > 0) Floors = floors;
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ошибка ввода. Количество этажей должно быть целым и больше нуля.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                Console.Write("Введите высоту одного этажа (в метрах): ");
+                if (Int32.TryParse(Console.ReadLine(), out int height) && height > 0) Height = height;
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ошибка ввода. Высота должна быть числом больше нуля.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
             }
-            Console.Write("Введите количество этажей: ");
-            if (Int32.TryParse(Console.ReadLine(), out int floors) && floors > 0) Floors = floors;
-            else
+            catch (FormatException fe)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Ошибка ввода. Количество этажей должно быть целым и больше нуля.");
+                Console.WriteLine($"\nОшибка ввода \n" + fe.Message);
                 Console.ForegroundColor = ConsoleColor.White;
             }
-            Console.Write("Введите высоту одного этажа (в метрах): ");
-            if (Int32.TryParse(Console.ReadLine(), out int height) && height > 0) Height = height;
-            else
+            catch (Exception e)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Ошибка ввода. Высота должна быть числом больше нуля.");
+                Console.WriteLine($"\nОшибка ввода \n" + e.Message);
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }

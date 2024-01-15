@@ -1,3 +1,9 @@
+//***************************************************************************************************
+//* Практическая работа № 16                                                                        *
+//* Выполнил: Пирогов Д., группа 2ИСП                                                               *
+//* Задание: разработать классы: объявление, создание экземпляров класса                            *
+//***************************************************************************************************
+
 using System;
 
 class Program
@@ -19,7 +25,7 @@ class Program
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Ошибка ввода. Название здания не может быть пустым.");
                     Console.ForegroundColor = ConsoleColor.White;
-                    Environment.Exit(1);
+                    Input();
                 }
                 Console.Write("Введите количество этажей: ");
                 if (Int32.TryParse(Console.ReadLine(), out int floors) && floors > 0) Floors = floors;
@@ -28,6 +34,7 @@ class Program
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Ошибка ввода. Количество этажей должно быть целым и больше нуля.");
                     Console.ForegroundColor = ConsoleColor.White;
+                    Input();
                 }
                 Console.Write("Введите высоту одного этажа (в метрах): ");
                 if (Int32.TryParse(Console.ReadLine(), out int height) && height > 0) Height = height;
@@ -36,6 +43,7 @@ class Program
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Ошибка ввода. Высота должна быть числом больше нуля.");
                     Console.ForegroundColor = ConsoleColor.White;
+                    Input();
                 }
             }
             catch (FormatException fe)
@@ -43,12 +51,14 @@ class Program
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"\nОшибка ввода \n" + fe.Message);
                 Console.ForegroundColor = ConsoleColor.White;
+                Input();
             }
             catch (Exception e)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"\nОшибка ввода \n" + e.Message);
                 Console.ForegroundColor = ConsoleColor.White;
+                Input();
             }
         }
         void GetInfo()
